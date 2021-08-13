@@ -1,0 +1,132 @@
+
+<div class="container-fluid">
+  <!-- <div class="row d-flex justify-content-start">
+      <div class="col-12">
+          <h3>User Management</h3>
+      </div>
+  </div> -->
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page" *ngIf="listmode">LIST</li>
+        <li class="breadcrumb-item active" aria-current="page" *ngIf="addmode">ADD</li>
+        <li class="breadcrumb-item active" aria-current="page" *ngIf="editmode">EDIT</li>
+        <li class="breadcrumb-item active" aria-current="page" *ngIf="deletemode">DELETE</li>
+      </ol>
+  </nav>
+</div>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-end">
+      <button class="btn btn-sm btn_bg mr-3 mb-1" *ngIf="addmode" style="font-size: 12px;"  data-toggle="modal" data-target=".addUser"> <i class="fas fa-plus"></i> Add</button>
+  </div>
+
+  <div class="card shadow mb-4 card_border_radius">
+      <div class="card-header py-3 card_header_table">
+          <h6 class="m-0 font-weight-bold text-white">Job No Management List</h6>
+      </div>
+      <div class="card-body" *ngIf="!dataLoaded" style="align-items: center;">
+          <div class="sk-chase">
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+              <div class="sk-chase-dot"></div>
+          </div>
+          <p>Loading Job No Management List</p>
+      </div>
+      <div class="card-body" *ngIf="dataLoaded">
+          <div class="table-responsive">
+              <table class="table table-bordered table-sm" datatable width="120%" cellspacing="0" [dtOptions]="dtOptions" >
+                  <thead style="font-size: 14px;" class="table_header" >
+                      <tr>
+                          <th>S.No</th>
+                          <th>Station Name</th>
+                          <th>Job No</th>
+                          <th>Serving Level</th>
+                          <th>Created At</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+
+                  <tbody style="font-size: 14px;">
+                      <tr *ngFor="let item of UserList; let i = index;">
+                          <td>{{i+1}}</td>
+                          <td> <span *ngIf="item.station_id.type == '1'">( LIFT )</span><span *ngIf="item.station_id.type == '2'">( ELIVATOR )</span> - {{item.station_id.station_name}}</td>
+                          <td>{{item.job_no}}</td>
+                          <td>{{item.serving_level}}</td>
+                          <td>{{item.createdAt | date}}</td>
+                          <td>
+                              <button class="btn btn-sm mr-1" (click)="editUser(item)"> <i class="far fa-edit"></i> </button>
+                              <button class="btn btn-sm mr-1" (click)="validate(item._id)"> <i class="fas fa-trash-alt"></i> </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="modal fade addUser" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+  <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Add Job No</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <div class="container">
+              <form [formGroup]="addUserForm">
+                <div class="form-row">
+                  <div class="form-group col-lg-4 col-md-4 col-sm-12">
+                    <label for="">Type</label>
+                    <select name="cars" id="cars" formControlName="station_id" class="form-control">
+                      <ng-container *ngFor="let station of Station_list">
+                        <option value="{{station._id}}"> <span *ngIf="station.type == '1'">( LIFT )</span><span *ngIf="station.type == '2'">( ELIVATOR )</span> - {{station.station_name}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                  <div class="form-group col-lg-4 col-md-4 col-sm-12">
+                    <label for="">Job No</label>
+                    <input type="text" formControlName="job_no" class="form-control">
+                  </div>
+                  <div class="form-group col-lg-4 col-md-4 col-sm-12">
+                    <label for="">Serving Level</label>
+                    <input type="text" formControlName="serving_level" class="form-control">
+                  </div>
+                </div>
+              </form>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn_bg btn-sm" (click)="addUser()" *ngIf="addmode">ADD</button>
+          <button type="button" class="btn btn_bg btn-sm" (click)="updateUser()" *ngIf="editmode">UPDATE</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="cancel()">Cancel</button>
+      </div>
+  </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Do you really want to delete this Job No ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" (click)="cancel()">No</button>
+        <button type="button" class="btn btn-success btn-sm" (click)="deleteUser()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
