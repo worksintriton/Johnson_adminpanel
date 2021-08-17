@@ -4,11 +4,14 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 import { AdminModulesService } from 'src/app/services/admin-modules.service';
 import Swal from 'sweetalert2';
 declare var $:any;
+import { DatePipe } from '@angular/common'
+
 
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
-  styleUrls: ['./user-management.component.scss']
+  styleUrls: ['./user-management.component.scss'],
+  providers: [DatePipe]
 })
 export class UserManagementComponent implements OnInit {
   dtOptions: any = {};
@@ -29,14 +32,19 @@ export class UserManagementComponent implements OnInit {
 
   constructor(private adminService:AdminModulesService, 
               private toastr:ToastrManager, 
+              public datepipe: DatePipe,
               private formBuilder:FormBuilder) {
                 this.addUserForm = this.formBuilder.group({
                   id:[''],
-                  User_name:['',Validators.required],
-                  created_at:['',Validators.required],
-                  created_by:['',Validators.required],
-                  modified_at:['',Validators.required],
-                  modified_by:['',Validators.required],
+                  username:['',Validators.required],
+                  password:['',Validators.required],
+                  user_email:['',Validators.required],
+                  user_phone:['',Validators.required],
+                  employee_id:['',Validators.required],
+                  date_of_reg:['',Validators.required],
+                  profile_img:['',Validators.required],
+                  user_type:['',Validators.required],
+                  user_status:['',Validators.required]
                 });
                }
 
@@ -58,8 +66,25 @@ export class UserManagementComponent implements OnInit {
 
     this.adminService.getUserList().subscribe(async data=>{
       const response:any = data;
-      if (response['success']) {
-        this.UserList = await response['data'];
+      console.log(response);
+      let count = response['Data'];
+      count = count.length;
+      count = count + 1;
+      let temp = "EMP"+count;
+      console.log(temp);
+      let date =  this.datepipe.transform(new Date(), 'yyyy-MM-dd');
+      this.addUserForm.controls['employee_id'].setValue(temp);
+      this.addUserForm.controls['user_status'].setValue("True");
+      this.addUserForm.controls['employee_id'].disable();
+      this.addUserForm.controls['user_status'].disable();
+      this.addUserForm.controls['date_of_reg'].setValue(date);
+      this.addUserForm.controls['date_of_reg'].disable();
+      this.addUserForm.controls['user_type'].setValue("1");
+      
+
+
+      if (response['Status']) {
+        this.UserList = await response['Data'];
         this.dataLoaded = true;
       } else {
         this.UserList = [];
@@ -80,13 +105,22 @@ export class UserManagementComponent implements OnInit {
 
 
   addUser(){
+    let count = this.UserList.length;
+    count = count + 1;
+    let temp = count;
+    console.log(temp);
+    let date =  this.datepipe.transform(new Date(), 'yyyy-MM-dd');
+    this.addUserForm.controls['date_of_reg'].setValue(date);
+    this.addUserForm.controls['employee_id'].setValue(+temp);
+    this.addUserForm.value.employee_id = temp;
+    console.log(this.addUserForm.value);
     this.adminService.createUser(this.addUserForm.value).subscribe(data=>{
       const response:any = data;
-      if (response['success']) {
-        this.showSuccess(response['msg']);
+      if (response['Status'] == "Success") {
+        this.showSuccess(response['Message']);
         this.cancel();
       } else {
-        this.showError(response['msg']);
+        this.showError(response['Message']);
       }
     })
   }
@@ -110,12 +144,16 @@ export class UserManagementComponent implements OnInit {
   editUser(data:any){
     if (data != null) {
       this.addUserForm.patchValue({
-        id: data.id,
-        User_name: data.User_name,
-        created_at: data.created_at,
-        created_by: data.created_by,
-        modified_at: data.modified_at,
-        modified_by: data.modified_by,
+        id: data._id,
+        username : data.username,
+        password : data.password,
+        user_email : data.user_email,
+        user_phone : data.user_phone,
+        employee_id : data.employee_id,
+        date_of_reg : data.date_of_reg,
+        profile_img : data.profile_img,
+        user_type : data.user_type,
+        user_status : data.user_status       
       });
       $('.addUser').modal('show');
       this.selectedData_ID =  data.id;
@@ -133,26 +171,30 @@ export class UserManagementComponent implements OnInit {
     this.dataLoaded = false;
     this.adminService.deleteUser(this.selectedData_ID).subscribe(data=>{
       const response:any = data;
-      if (response['success']) {
-        this.showSuccess(response['msg']);
+      if (response['Status'] == "Success") {
+        this.showSuccess(response['Message']);
         this.cancel();
         this.selectedData_ID = null;
       } else {
-        this.showError(response['msg']);
+        this.showError(response['Message']);
       }
     });
   }
+
+
+
+
 
   updateUser(){
     this.dataLoaded = false;
     this.adminService.updateUser(this.addUserForm.value).subscribe(data=>{
       const response:any = data;
-      if (response['success']) {
-        this.showSuccess(response['msg']);
+      if (response['Status'] == "Success") {
+        this.showSuccess(response['Message']);
         this.cancel();
         this.selectedData_ID = null;
       } else {
-        this.showSuccess(response['msg']);
+        this.showSuccess(response['Message']);
       }
     });
   }
@@ -178,8 +220,8 @@ export class UserManagementComponent implements OnInit {
     };
     this.adminService.getUserList().subscribe(async data=>{
       const response:any = data;
-      if (response['success']) {
-        this.UserList = await response['data'];
+      if (response['Status']) {
+        this.UserList = await response['Data'];
         this.dataLoaded = true;
       } else {
         this.UserList = [];

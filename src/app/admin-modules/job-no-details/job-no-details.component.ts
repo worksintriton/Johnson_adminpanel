@@ -105,12 +105,12 @@ export class JobNoDetailsComponent implements OnInit {
     this.adminService.createjobno(this.addUserForm.value).subscribe(data=>{
       const response:any = data;
       console.log(response);
-      if (response['Status'] == "Success") {
-        this.showSuccess(response['Message']);
-        this.cancel();
-      } else {
-        this.showError(response['Message']);
-      }
+      // if (response['Status'] == "Success") {
+      //   this.showSuccess(response['Message']);
+      //   this.cancel();
+      // } else {
+      //   this.showError(response['Message']);
+      // }
     })
   }
 

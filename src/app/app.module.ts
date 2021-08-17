@@ -30,6 +30,10 @@ import { FaultTypeDetailsComponent } from './admin-modules/fault-type-details/fa
 import { NotificationDetailsComponent } from './admin-modules/notification-details/notification-details.component';
 import { TicketDetailsComponent } from './admin-modules/ticket-details/ticket-details.component';
 
+
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +68,7 @@ import { TicketDetailsComponent } from './admin-modules/ticket-details/ticket-de
     ChartsModule,
     CommonModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

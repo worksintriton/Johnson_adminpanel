@@ -12,27 +12,27 @@ export class AdminModulesService {
   // User MANAGEMENT API LIST STARTS HERE //
 
   getUserList(){
-    return this.http.get(environment.baseurl+'user-management/getlist')
+    return this.http.get(environment.baseurl+'userdetails/getlist')
   }
 
   getUserInfo(id:any){
-    return this.http.get(environment.baseurl+'user-management/getby_id/'+id);
+    return this.http.get(environment.baseurl+'userdetails/getby_id/'+id);
   }
 
   createUser(data:any){
-    return this.http.post(environment.baseurl+'user-management/create',data);
+    return this.http.post(environment.baseurl+'userdetails/create',data);
   }
 
   updateUser(data:any){
-    return this.http.put(environment.baseurl+'user-management/update/'+data.id,data)
+    return this.http.put(environment.baseurl+'userdetails/update/'+data.id,data)
   }
 
   deleteUser(id:any){
-    return this.http.delete(environment.baseurl+'user-management/delete/'+id);
+    return this.http.delete(environment.baseurl+'userdetails/delete/'+id);
   }
 
   searchUserList(data:any){
-    return this.http.post(environment.baseurl+'user-management/search',data)
+    return this.http.post(environment.baseurl+'userdetails/search',data)
   }
 
 
