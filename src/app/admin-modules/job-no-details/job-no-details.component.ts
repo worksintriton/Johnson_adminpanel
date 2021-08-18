@@ -36,6 +36,7 @@ export class JobNoDetailsComponent implements OnInit {
                 this.addUserForm = this.formBuilder.group({
                   id: [''],
                   station_id:['',Validators.required],
+                  unique_id : ['',Validators.required],
                   job_no:['',Validators.required],
                   serving_level:['',Validators.required],
                 });
@@ -54,10 +55,10 @@ export class JobNoDetailsComponent implements OnInit {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 500,
       processing: true,
       ordering:true,
-      lengthMenu : [5, 10, 25, 50, 100]
+      lengthMenu : [5, 10, 25, 50, 100 , 500]
     };
 
 
@@ -105,12 +106,12 @@ export class JobNoDetailsComponent implements OnInit {
     this.adminService.createjobno(this.addUserForm.value).subscribe(data=>{
       const response:any = data;
       console.log(response);
-      // if (response['Status'] == "Success") {
-      //   this.showSuccess(response['Message']);
-      //   this.cancel();
-      // } else {
-      //   this.showError(response['Message']);
-      // }
+      if (response['Status'] == "Success") {
+        this.showSuccess(response['Message']);
+        this.cancel();
+      } else {
+        this.showError(response['Message']);
+      }
     })
   }
 
@@ -134,6 +135,7 @@ export class JobNoDetailsComponent implements OnInit {
     if (data != null) {
       this.addUserForm.patchValue({
         id: data._id,
+        unique_id : data.unique_id,
         station_id: data.station_id._id,
         job_no: data.job_no,
         serving_level :  data.serving_level
@@ -192,10 +194,10 @@ export class JobNoDetailsComponent implements OnInit {
   onPageReload(){
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 500,
       processing: true,
       ordering:true,
-      lengthMenu : [5, 10, 25, 50, 100]
+      lengthMenu : [5, 10, 25, 50, 500]
     };
     this.adminService.getjobnoList().subscribe(async data=>{
       const response:any = data;

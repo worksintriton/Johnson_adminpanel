@@ -68,7 +68,9 @@ export class UserManagementComponent implements OnInit {
       const response:any = data;
       console.log(response);
       let count = response['Data'];
-      count = count.length;
+      count = count[count.length - 1].employee_id;
+      console.log(count);
+      // count = count.length;
       count = count + 1;
       let temp = "EMP"+count;
       console.log(temp);
@@ -119,6 +121,7 @@ export class UserManagementComponent implements OnInit {
       if (response['Status'] == "Success") {
         this.showSuccess(response['Message']);
         this.cancel();
+        this.ngOnInit();
       } else {
         this.showError(response['Message']);
       }

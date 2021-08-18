@@ -40,8 +40,11 @@
                   <thead style="font-size: 14px;" class="table_header" >
                       <tr>
                           <th>S.No</th>
+                          <!-- <th>Station id</th> -->
                           <th>Station Name</th>
+                          <!-- <th>Job id</th> -->
                           <th>Job No</th>
+                          <th>Unique ID</th>
                           <th>Serving Level</th>
                           <th>Created At</th>
                           <th>Action</th>
@@ -51,13 +54,16 @@
                   <tbody style="font-size: 14px;">
                       <tr *ngFor="let item of UserList; let i = index;">
                           <td>{{i+1}}</td>
+                          <!-- <td>{{item.station_id._id}}</td> -->
                           <td> <span *ngIf="item.station_id.type == '1'">( LIFT )</span><span *ngIf="item.station_id.type == '2'">( ELIVATOR )</span> - {{item.station_id.station_name}}</td>
+                          <!-- <td>{{item._id}}</td> -->
                           <td>{{item.job_no}}</td>
+                          <td>{{item.unique_id}}</td>
                           <td>{{item.serving_level}}</td>
                           <td>{{item.createdAt | date}}</td>
                           <td>
-                              <button class="btn btn-sm mr-1" (click)="editUser(item)"> <i class="far fa-edit"></i> </button>
-                              <button class="btn btn-sm mr-1" (click)="validate(item._id)"> <i class="fas fa-trash-alt"></i> </button>
+                              <button class="btn btn-sm mr-1" (click)="editUser(item)"><i class="far fa-edit"></i></button>
+                              <button class="btn btn-sm mr-1" (click)="validate(item._id)"><i class="fas fa-trash-alt"></i></button>
                           </td>
                       </tr>
                   </tbody>
@@ -92,6 +98,10 @@
                   <div class="form-group col-lg-4 col-md-4 col-sm-12">
                     <label for="">Job No</label>
                     <input type="text" formControlName="job_no" class="form-control">
+                  </div>
+                  <div class="form-group col-lg-4 col-md-4 col-sm-12">
+                    <label for="">Unique ID</label>
+                    <input type="text" formControlName="unique_id" class="form-control">
                   </div>
                   <div class="form-group col-lg-4 col-md-4 col-sm-12">
                     <label for="">Serving Level</label>

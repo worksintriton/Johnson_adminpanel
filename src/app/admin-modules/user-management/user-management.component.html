@@ -40,6 +40,7 @@
                     <thead style="font-size: 14px;" class="table_header" >
                         <tr>
                             <th>S.No</th>
+                            <!-- <th>Id</th> -->
                             <th>Employee Id</th>
                             <th>Profile</th>
                             <th>User Name</th>
@@ -55,6 +56,7 @@
                     <tbody style="font-size: 14px;">
                         <tr *ngFor="let item of UserList; let i = index;">
                             <td>{{i+1}}</td>
+                              <!-- <td>{{item._id}}</td> -->
                             <td>{{item.employee_id}}</td>
                             <td><img style="width: 40%;border-radius: 50%;" src="../../../assets/img_avatar.png"></td>
                             <td>{{item.username}}</td>
