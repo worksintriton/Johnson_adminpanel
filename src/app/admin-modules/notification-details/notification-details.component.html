@@ -1,1 +1,80 @@
-<p>notification-details works!</p>
+<div class="container-fluid">
+    <!-- <div class="row d-flex justify-content-start">
+        <div class="col-12">
+            <h3>User Management</h3>
+        </div>
+    </div> -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page" >Notification</li>
+            <!-- <li class="breadcrumb-item active" aria-current="page" *ngIf="addmode">ADD</li>
+            <li class="breadcrumb-item active" aria-current="page" *ngIf="editmode">EDIT</li>
+            <li class="breadcrumb-item active" aria-current="page" *ngIf="deletemode">DELETE</li> -->
+        </ol>
+    </nav>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card-body" *ngIf="dataLoaded">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm" datatable width="99.6%" cellspacing="0"
+                        [dtOptions]="dtOptions">
+                        <thead style="font-size: 14px;" class="table_header">
+                            <tr>
+                                <th>Select</th>
+                                <!-- <th>Employee Id</th> -->
+                                <!-- <th>Profile</th> -->
+                                <th>User Name</th>
+                                <!-- <th>Password</th> -->
+                                <th>Email</th>
+                                <!-- <th>Phone</th> -->
+                                <!-- <th>Type</th> -->
+                                <!-- <th>Date of Reg</th> -->
+                                <!-- <th>Status</th> -->
+                                <!-- <th>Action</th> -->
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: 14px;">
+                            <tr *ngFor="let item of UserList; let i = index;">
+                                <td><input type="checkbox" id="{{i}}" name="{{i}}" value="{{item.user_email}}" (change)="setemaillist($event,item.user_email)">
+                                </td>
+                                <!-- <td>{{item.employee_id}}</td> -->
+                                <!-- <td><img style="width: 40%;border-radius: 50%;" src="../../../assets/img_avatar.png"> 
+                                </td>-->
+                                <td>{{item.username}}</td>
+                                <!-- <td>{{item.password}}</td> -->
+                                <td>{{item.user_email}}</td>
+                                <!-- <td>{{item.user_phone}}</td> -->
+                                <!-- <td><span *ngIf="item.user_type == '1'">CMRL</span><span
+                                        *ngIf="item.user_type == '2'">Johnson</span></td> -->
+                                <!-- <td>{{item.date_of_reg | date}}</td> -->
+                                <!-- <td>{{item.user_status}}</td> -->
+                                <!-- <td>
+                                    <button class="btn btn-sm mr-1" (click)="profile(item)"> <i class="fas fa-eye"></i>
+                                    </button>
+
+                                    <button class="btn btn-sm mr-1" (click)="editUser(item)"> <i
+                                            class="far fa-edit"></i> </button>
+                                    <button class="btn btn-sm mr-1" (click)="validate(item._id)"> <i
+                                            class="fas fa-trash-alt"></i> </button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <form class="email">
+                <label for="fname">Subject</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                <label for="subject">Message</label>
+                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+                <input type="submit" value="Send">
+            </form>
+        </div>
+    </div>
+</div>

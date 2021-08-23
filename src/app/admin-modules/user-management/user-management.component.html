@@ -36,20 +36,20 @@
         </div>
         <div class="card-body" *ngIf="dataLoaded">
             <div class="table-responsive">
-                <table class="table table-bordered table-sm" datatable width="120%" cellspacing="0" [dtOptions]="dtOptions" >
+                <table class="table table-bordered table-sm" datatable width="100%" cellspacing="0" [dtOptions]="dtOptions" >
                     <thead style="font-size: 14px;" class="table_header" >
                         <tr>
                             <th>S.No</th>
                             <!-- <th>Id</th> -->
                             <th>Employee Id</th>
-                            <th>Profile</th>
+                            <!-- <th>Profile</th> -->
                             <th>User Name</th>
                             <th>Password</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Type</th>
                             <th>Date of Reg</th>
-                            <th>Status</th>
+                            <!-- <th>Status</th> -->
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -58,14 +58,14 @@
                             <td>{{i+1}}</td>
                               <!-- <td>{{item._id}}</td> -->
                             <td>{{item.employee_id}}</td>
-                            <td><img style="width: 40%;border-radius: 50%;" src="../../../assets/img_avatar.png"></td>
+                            <!-- <td><img style="width: 40%;border-radius: 50%;" src="../../../assets/img_avatar.png"></td> -->
                             <td>{{item.username}}</td>
                             <td>{{item.password}}</td>
                             <td>{{item.user_email}}</td>
                             <td>{{item.user_phone}}</td>
                             <td><span *ngIf="item.user_type == '1'">CMRL</span><span *ngIf="item.user_type == '2'">Johnson</span></td>
                             <td>{{item.date_of_reg | date}}</td>
-                            <td>{{item.user_status}}</td>                          
+                            <!-- <td>{{item.user_status}}</td>                           -->
                             <td>
                                 <button class="btn btn-sm mr-1" (click)="editUser(item)"> <i class="far fa-edit"></i> </button>
                                 <button class="btn btn-sm mr-1" (click)="validate(item._id)"> <i class="fas fa-trash-alt"></i> </button>

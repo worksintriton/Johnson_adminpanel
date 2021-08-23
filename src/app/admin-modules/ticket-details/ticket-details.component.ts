@@ -4,7 +4,6 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 import { AdminModulesService } from 'src/app/services/admin-modules.service';
 import Swal from 'sweetalert2';
 declare var $:any;
-
 @Component({
   selector: 'app-ticket-details',
   templateUrl: './ticket-details.component.html',
@@ -26,6 +25,8 @@ export class TicketDetailsComponent implements OnInit {
 
   state_name = '';
   country_name = '';
+  images:any = ["https://bootdey.com/img/Content/user_1.jpg","https://bootdey.com/img/Content/user_2.jpg","https://bootdey.com/img/Content/user_1.jpg"]
+  imageIndex:any=0;
 
   constructor(private adminService:AdminModulesService,
               private toastr:ToastrManager,
@@ -211,5 +212,16 @@ export class TicketDetailsComponent implements OnInit {
       text: msg,
     })
   }
+
+  tickethistory(data:any){
+    $('#deleteModal2').modal('show');
+  }
+
+
+  img_view(){
+    $('#deleteModal3').modal('show');
+  }
 }
+
+
 

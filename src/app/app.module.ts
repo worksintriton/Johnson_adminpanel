@@ -32,7 +32,10 @@ import { TicketDetailsComponent } from './admin-modules/ticket-details/ticket-de
 
 
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
-
+import {
+  AngularImageViewerModule
+} from "angular-x-image-viewer";
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
     CarouselModule,
     DataTablesModule,
     ChartsModule,
-    CommonModule
+    CommonModule,
+    AngularImageViewerModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

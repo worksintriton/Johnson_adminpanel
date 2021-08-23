@@ -26,6 +26,7 @@
     "ag-grid-community": "^24.1.0",
     "angular-datatables": "^11.2.0",
     "angular-ng-autocomplete": "^2.0.1",
+    "angular-x-image-viewer": "^2.0.1",
     "angular2-json2csv": "^1.1.2",
     "animate.css": "^4.1.1",
     "bootstrap": "^4.5.3",
