@@ -1,65 +1,8 @@
-<!-- <div class="col-md-12 p-0">
-    <div class="page-title"> Ticket Details </div>
-        
-    <div class="col-md-12">
-      <div class="row">
-        <mat-form-field class="col-md-10 p-0" appearance="outline" >
-          <mat-label>Search</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="" />
-        </mat-form-field>
-  
-        <div class="col-md-2 p-0 example-button-container" >
-          <button style="float: right;" mat-mini-fab color="primary"   matTooltip="Create Station" (click)="addRecord()"> + </button>
-        </div>
-      </div>
-    </div>
 
-      <div class="mat-table-container" id="test1" #test1>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matTableResponsive>
-    
-      <div *ngFor="let displayCol of displayedColumns; let i = index" matColumnDef="{{ displayCol }}">
-      <th mat-header-cell class="field-title" *matHeaderCellDef mat-sort-header> {{ displayedLabelColumns[i] }} </th>
-    
-        <ng-container *matCellDef="let element" [ngSwitch]="displayCol">
-          <td mat-cell *ngSwitchCase="'actions'" (click)="$event.stopPropagation()">
-            <button mat-icon-button  matTooltip="Edit"
-            (click)="editRecord(element)">
-            <mat-icon class="edit-mat-icon">edit</mat-icon>
-          </button>
-          <button mat-icon-button  matTooltip="View"
-          (click)="viewRecord(element.station_id)">
-          <mat-icon class="edit-mat-icon">visibility</mat-icon>
-        </button>
-          </td>
-          <td mat-cell *ngSwitchCase="'createdDate'">
-            {{ element[displayCol] | date: DATE_FORMAT }}
-          </td>
-          <td mat-cell *ngSwitchCase="'updatedDate'">
-            {{ element[displayCol] | date: DATE_FORMAT }}
-          </td>
-           <td mat-cell *ngSwitchDefault>
-           <div *ngIf="!element[displayCol]">-</div>
-           <div *ngIf="element[displayCol]">{{ element[displayCol] }}</div>
-           </td>
-        </ng-container>
-      </div>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns" [ngClass]= "{'formFieldAdded': row.isActive && row.isActive == 'N'}"></tr>
-    </table>
-    </div>
-    
-      <mat-paginator [pageSize]="PAGE_SIZE" [pageSizeOptions]="PAGINATION_RANGE" showFirstLastButtons></mat-paginator>
-    </div>
-
-    -->
 
 
     <div class="col-md-12 p-0">
       <div class="page-title">Ticket Details </div>
-      <div *ngIf="List && List.length == 0">No record found </div>
-     <div *ngIf="List && List.length > 0">  
-
-
 
       <div class="row outline m-0 mt-2 mb-2 p-0">
         <div class="col-12 pt-1 page-sub-title-2">Filter</div>
@@ -87,7 +30,7 @@
             </div>
         </form>
     </div>
-     
+
 
       <div class="col-md-12 pt-3 pb-2 outline">
         <div class="row">
@@ -102,14 +45,18 @@
                         <mat-form-field class="col-md-3">
                         <mat-label>Fault Type</mat-label>
                         <mat-select formControlName="fault_type" multiple>
-                        <mat-option *ngFor="let item of List" [value]="item.fault_type">{{item.fault_type}}</mat-option>
+                        <mat-option *ngFor="let item of faultTypeList" [value]="item.fault_type">{{item.fault_type}}</mat-option>
                         </mat-select>
                         </mat-form-field>
                         <mat-form-field class="col-md-3">
                         <mat-label>Status</mat-label>
                         <mat-select formControlName="status" multiple>
-                          <mat-option value="Close" >CLOSE</mat-option>
-                          <mat-option value="Completed">COMPLETED</mat-option>
+                          <mat-option value="Open" >Open</mat-option>
+                          <mat-option value="Pending" >Pending</mat-option>
+                          <mat-option value="Inprogress " >Inprogress </mat-option>
+                          <mat-option value="Completed">Completed</mat-option>
+                          <mat-option value="Close" >Closed</mat-option>
+
                         </mat-select>
                         </mat-form-field>
                         <mat-form-field class="col-md-3">
@@ -122,38 +69,44 @@
             </form>
            </div>
                <div class="col-md-1 mt-2 p-0 pl-4">
-          <button type="submit" (click)="getFormsValue()" mat-button class="btnnn-prime-fn">Submit</button>
+          <button type="submit" (click)="submitData()" mat-button class="btnnn-prime-fn">Submit</button>
           </div>
           <div class="col-md-1 mt-2 p-0 pl-2">
             <button type="submit" (click)="clearForm()" mat-button class="btnnn-prime-fn">Clear</button>
             </div>
         </div>
       </div>
-     
-  
-  
-  
-     
+
+
+
+
+
         <div class="row pt-2">
           <div class="col-md-10 mt-2 p-0 pl-3 mb-2">
             <button mat-raised-button class="btnnn-secondary-fn mr-2" (click)="exportAsXLSX()">
               <img  src="../../../assets/images/excel.png" style="width: 25px" class="button-icon" alt="excel icon" mat-responsive /> Export to Excel</button>
            </div>
-        
+
+           <div class="col-md-10 mt-2 p-0 pl-3 mb-2">
+           <button mat-raised-button class="btnnn-secondary-fn mr-2" (click)="exportAsXLSX2()">
+            <img  src="../../../assets/images/excel.png" style="width: 25px" class="button-icon" alt="excel icon" mat-responsive /> Export ticket history</button>
+         </div>
+
         </div>
 
 
 
-          
-  
-        <div class="mat-table-container" id="test1" #test1>
+        <div class="loader" *ngIf="loader_show"></div>
+        <h3 class="" *ngIf="final_data.length == 0">No Record Found</h3>
+
+        <div class="mat-table-container" id="test1" #test1 *ngIf="!loader_show" >
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matTableResponsive>
         <!-- Dynamic Column -->
         <div *ngFor="let displayCol of displayedColumns; let i = index" matColumnDef="{{ displayCol }}">
         <th mat-header-cell class="field-title" *matHeaderCellDef mat-sort-header> {{ displayedLabelColumns[i] }} </th>
-      
+
           <ng-container *matCellDef="let element" [ngSwitch]="displayCol">
-          
+
             <td mat-cell *ngSwitchCase="'actions'">
             <button mat-icon-button  matTooltip="View"
             (click)="viewRecord(element.ticket_no)">
@@ -176,9 +129,8 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns" [ngClass]= "{'formFieldAdded': row.isActive && row.isActive == 'N'}"></tr>
       </table>
-      </div>
-      
+        </div>
         <mat-paginator [pageSize]="PAGE_SIZE" [pageSizeOptions]="PAGINATION_RANGE" showFirstLastButtons></mat-paginator>
-      </div>
+
+
     </div>
-     

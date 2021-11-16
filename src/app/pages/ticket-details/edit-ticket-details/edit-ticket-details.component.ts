@@ -18,12 +18,12 @@ export class EditTicketDetailsComponent implements OnInit {
   editForm: AddEditTicketDetailsFormComponent;
   user: User;
   private _id: any;
-  
+
   constructor( @Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<EditTicketDetailsComponent>,
   private adminService:AdminModulesService,) {}
 
   ngOnInit() {
-    debugger
+
     var datas = this.data;
     this._id =this.data._id;
     setTimeout(() => {
@@ -34,7 +34,7 @@ export class EditTicketDetailsComponent implements OnInit {
 private fillForm(parsedData) {
   this.editForm.addEditForm.patchValue({
     station_name: parsedData.station_name,
-    type: parsedData.type &&  parsedData.type == "LIFT" ?  1 : 2, 
+    type: parsedData.type &&  parsedData.type == "LIFT" ?  1 : 2,
   });
 }
 
@@ -43,7 +43,7 @@ public update() {
   this.isShowErrors = true;
   if (this.editForm.addEditForm.valid) {
     const enteredData = this.editForm.addEditForm.value;
-  
+
       enteredData.id = this.data._id;
       this.adminService.updatestation(enteredData).subscribe(
         response => {
@@ -54,16 +54,16 @@ public update() {
           this.handleError(err.error.message);
         }
       )
-    
+
   }
   else {
-   
+
   }
 }
 
 private success(message) {
   Swal.fire({toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: message['Status'], icon: 'success', });
-  this.dialogRef.close('Success'); 
+  this.dialogRef.close('Success');
  // this.alertService.success('Saved successfully');
 }
 

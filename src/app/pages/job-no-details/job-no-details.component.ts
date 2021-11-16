@@ -32,7 +32,7 @@ export class Product {
 export class JobNoDetailsComponent implements OnInit {
   @ViewChild('test1', { static: false }) content: ElementRef;
   testAttributesMap = new Map();
-  
+
   PAGE_SIZE = MatTableAttributes.PAGE_SIZE;
   PAGINATION_RANGE = MatTableAttributes.PAGINATION_RANGE;
   DATE_FORMAT = DateFormat.DATE_FORMAT;
@@ -43,7 +43,7 @@ export class JobNoDetailsComponent implements OnInit {
   dynamicTableData: any[];
   user: User;
   stationAllList: any;
-  
+
   constructor(private adminService:AdminModulesService,public dialog: MatDialog,private exportToExcelService: ExportToExcelService,)
    {}
 
@@ -59,7 +59,7 @@ export class JobNoDetailsComponent implements OnInit {
   getAllCustomer(){
     this.adminService.getjobnoList().pipe()
     .subscribe( data => {
-        console.log("data ",data); 
+        console.log("data ",data);
         this.jobNumberList = data['Data'];
         this.loadRecord();
       },error => {
@@ -70,7 +70,7 @@ export class JobNoDetailsComponent implements OnInit {
   getAllDatas(){
     this.adminService.getstationList().pipe()
     .subscribe( data => {
-        console.log("data ",data); 
+        console.log("data ",data);
         this.stationAllList = data['Data'];
       },error => {
         this.error = error;
@@ -79,7 +79,7 @@ export class JobNoDetailsComponent implements OnInit {
 
 
   loadRecord() {
-    debugger
+
     this.dynamicTableData = [];
     this.jobNumberList.forEach(element => {
       let row: Product = {
@@ -120,7 +120,7 @@ export class JobNoDetailsComponent implements OnInit {
   }
 
   exportAsXLSX(): void {
-    debugger;
+
     let new_list = this.dataSource.filteredData.map(function(obj) {
       return {
         "Station Name": obj.station_name,
@@ -135,7 +135,7 @@ export class JobNoDetailsComponent implements OnInit {
   }
 
   public editRecord(items) {
-    debugger
+
     const dialogRef = this.dialog.open(EditJobNoDetailsComponent, {
       width: '550px',
       height: 'fit-content',
@@ -146,7 +146,7 @@ export class JobNoDetailsComponent implements OnInit {
         job_no:items.job_no,
         serving_level:items.serving_level,
         unique_id:items.unique_id,
-   
+
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -157,10 +157,10 @@ export class JobNoDetailsComponent implements OnInit {
   }
 
   public deleteRecord(recordId){
-    // debugger
+    //
     // this.customerService.deleteCustomer(recordId).pipe()
     // .subscribe( data => {
-    //     console.log("data ",data); 
+    //     console.log("data ",data);
     //     this.jobNumberList = data;
     //     this.getAllCustomer();
     //   },error => {
@@ -173,13 +173,13 @@ export class JobNoDetailsComponent implements OnInit {
         station_name: new FormControl(),
         serving_level: new FormControl(),
         job_no: new FormControl(),
-     
+
       });
 
       get station_name() { return this.filterForm.get('station_name'); }
       get serving_level() { return this.filterForm.get('serving_level'); }
       get job_no() { return this.filterForm.get('job_no'); }
-    
+
 
       isArray = function(a) {
           return (!!a) && (a.constructor === Array);
@@ -188,7 +188,7 @@ export class JobNoDetailsComponent implements OnInit {
           return (!!a) && (a.constructor === Object);
       };
     getFormsValue() {
-      debugger
+
       const filterValues = {
         station_name: this.station_name.value,
         serving_level: this.serving_level.value,
@@ -197,8 +197,8 @@ export class JobNoDetailsComponent implements OnInit {
 
       this.dataSource.filterPredicate = (data, filter) => {
         let displayData = true;
-        let myFilter = JSON.parse(filter); 
-        
+        let myFilter = JSON.parse(filter);
+
         for (var key in myFilter) {
           if(myFilter[key]){
             if(typeof myFilter[key] === "string"){
@@ -207,7 +207,7 @@ export class JobNoDetailsComponent implements OnInit {
               }
             }
             if(this.isArray(myFilter[key])){
-              if (!myFilter[key].includes(data[key])) {           
+              if (!myFilter[key].includes(data[key])) {
                 displayData = false;
               }
             }

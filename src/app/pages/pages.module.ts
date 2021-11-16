@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { UIModule } from '../shared/ui/ui.module';
 import { PagesRoutingModule } from './pages-routing.module';
@@ -15,8 +15,25 @@ import { NotificationDetailsComponent } from './notification-details/notificatio
 import { NotificationDetailsModule } from './notification-details/notification-details.module';
 import { ViewTicketDetailsComponent } from './view-ticket-details/view-ticket-details.component';
 import { ViewTicketDetailsModule } from './view-ticket-details/view-ticket-details.module';
+
+
+
+// import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// import { CommonModule } from '@angular/common';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppMaterialModules } from 'src/app/material.module';
+import { ExceluploadComponent } from './excelupload/excelupload.component';
+import { DeleteticketComponent } from './deleteticket/deleteticket.component';
+// import { AddEditTicketDetailsFormComponent } from './add-edit-ticket-details-form/add-edit-ticket-details-form.component';
+// import { TicketDetailsComponent } from './ticket-details.component';
+// import { AddTicketDetailsComponent } from './add-ticket-details/add-ticket-details.component';
+// import { EditTicketDetailsComponent } from './edit-ticket-details/edit-ticket-details.component';
+
+
+
+
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, ExceluploadComponent, DeleteticketComponent],
   imports: [
     StationDetailsModule,
     JobNoDetailsModule,
@@ -31,6 +48,9 @@ import { ViewTicketDetailsModule } from './view-ticket-details/view-ticket-detai
     NgbDropdownModule,
     UIModule,
     PagesRoutingModule,
+    AppMaterialModules,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }

@@ -21,7 +21,7 @@ export class EditUserDetailsComponent implements OnInit {
   editForm: AddEditUserDetailsFormComponent;
   user: User;
   private _id: any;
-  
+
   constructor( @Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<EditUserDetailsComponent>,
   private authService: AuthenticationService,
   private adminService:AdminModulesService,) { this.user = this.authService.currentUser();}
@@ -35,7 +35,7 @@ export class EditUserDetailsComponent implements OnInit {
   }
 
 private fillForm(parsedData) {
-  debugger
+
   this.editForm.addEditForm.patchValue({
     username:parsedData.username,
     password:parsedData.password,
@@ -43,14 +43,14 @@ private fillForm(parsedData) {
     user_phone:parsedData.user_phone,
     employee_id:parsedData.employee_id,
     date_of_reg:parsedData.date_of_reg,
-    user_type: parsedData.user_type &&  parsedData.user_type == "CMRL" ?  1 : 2, 
+    user_type: parsedData.user_type &&  parsedData.user_type == "CMRL" ?  1 : 2,
     user_status:parsedData.user_status
   });
 }
 
 
 public update() {
-  debugger
+
   this.isShowErrors = true;
   if (this.editForm.addEditForm.valid) {
     const enteredData = this.editForm.addEditForm.value;
@@ -64,16 +64,16 @@ public update() {
           this.handleError(err.error.message);
         }
       )
-    
+
   }
   else {
-   
+
   }
 }
 
 private success(message) {
   Swal.fire({toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: message['Status'], icon: 'success', });
-  this.dialogRef.close('Success'); 
+  this.dialogRef.close('Success');
  // this.alertService.success('Saved successfully');
 }
 

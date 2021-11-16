@@ -40,7 +40,7 @@ export class TopbarComponent implements OnInit {
   constructor(private cartService:CartService,private cookieService: CookieService,
     private alertService: AlertService,private router: Router,private route: ActivatedRoute, private authService: AuthenticationService) {
     this.user = this.authService.currentUser();
-    debugger
+
     if(!JSON.parse(this.cookieService.getCookie('isClear'))){
       this.logout();
      }
@@ -59,7 +59,7 @@ export class TopbarComponent implements OnInit {
     // get the notifications
     this._fetchNotifications();
     this.openMobileMenu = false;
-  
+
   }
 
   ngOnDestroy(){
@@ -109,11 +109,11 @@ export class TopbarComponent implements OnInit {
         this.router.navigate(['/account/login']);
       }
     })
-    
+
   }
 
 
-  
+
 
   /**
    * Fetches the notification
@@ -124,7 +124,7 @@ export class TopbarComponent implements OnInit {
   }
 
 
- 
-  
+
+
 
 }

@@ -21,7 +21,7 @@ export class EditJobNoDetailsComponent implements OnInit {
   editForm: AddEditJobNoDetailsFormComponent;
   user: User;
   private _id: any;
-  
+
   constructor( @Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<EditJobNoDetailsComponent>,
   private adminService:AdminModulesService,) {}
 
@@ -34,7 +34,7 @@ export class EditJobNoDetailsComponent implements OnInit {
   }
 
 private fillForm(parsedData) {
-  debugger
+
   this.editForm.addEditForm.patchValue({
     station_id:parsedData.station_id,
     job_no:parsedData.job_no,
@@ -45,11 +45,11 @@ private fillForm(parsedData) {
 
 
 public update() {
-  debugger
+
   this.isShowErrors = true;
   if (this.editForm.addEditForm.valid) {
     const enteredData = this.editForm.addEditForm.value;
-  
+
       enteredData.id = this.data._id;
       this.adminService.updatejobno(enteredData).subscribe(
         response => {
@@ -60,16 +60,16 @@ public update() {
           this.handleError(err.error.message);
         }
       )
-    
+
   }
   else {
-   
+
   }
 }
 
 private success(message) {
   Swal.fire({toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: message['Status'], icon: 'success', });
-  this.dialogRef.close('Success'); 
+  this.dialogRef.close('Success');
  // this.alertService.success('Saved successfully');
 }
 

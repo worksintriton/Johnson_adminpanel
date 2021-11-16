@@ -8,7 +8,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./view-ticket-image.component.css']
 })
 export class ViewTicketImageComponent implements OnInit {
-  ticket_photo: any;
+  URI = 'http://54.215.252.172:3000/api';
+  ticket_photo:any;
 
   constructor( @Inject(MAT_DIALOG_DATA) public data: any,
   public dialogRef: MatDialogRef<ViewTicketImageComponent>) {}

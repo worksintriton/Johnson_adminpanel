@@ -119,6 +119,11 @@ export class AdminModulesService {
       return this.http.get(CommonConstants.WEBAPI_URL+'fault_type/getby_id/'+id);
     }
 
+    getlist_by_type(data:any){
+      console.log(data);
+      return this.http.post(CommonConstants.WEBAPI_URL+'fault_type/getlist_by_type',data);
+    }
+
     createfault(data:any){
       console.log(data);
       return this.http.post(CommonConstants.WEBAPI_URL+'fault_type/create',data);
@@ -163,5 +168,26 @@ export class AdminModulesService {
       return this.http.post(CommonConstants.WEBAPI_URL+'tickethistory/getFilterDatas',data)
     }
 
-    
+    getFilterDatas_alldata(data:any){
+      return this.http.post(CommonConstants.WEBAPI_URL+'tickethistory/getFilterDatas_alldatas',data)
+    }
+
+
+    // Ticket Details
+
+    ticketcreate(data:any){
+      return this.http.post(CommonConstants.WEBAPI_URL+'ticket/create',data)
+    }
+
+    ticketupdate(data:any){
+      return this.http.post(CommonConstants.WEBAPI_URL+'tickethistory/update',data)
+    }
+
+    ticketdelete(data:any){
+      return this.http.post(CommonConstants.WEBAPI_URL+'ticket/update',data)
+    }
+
+
+
+
 }

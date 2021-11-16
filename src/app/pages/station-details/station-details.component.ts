@@ -45,7 +45,7 @@ export class StationDetailsComponent implements OnInit {
   }
   dynamicTableData: any[];
   user: User;
-  
+
   constructor(private adminService:AdminModulesService,private alertService :AlertService,
     private exportToExcelService: ExportToExcelService,
     public dialog: MatDialog
@@ -63,9 +63,9 @@ export class StationDetailsComponent implements OnInit {
   getAllDatas(){
     this.adminService.getstationList().pipe()
     .subscribe( data => {
-        console.log("data ",data); 
+        console.log("data ",data);
         this.stationList = data['Data'];
-        
+
         this.loadRecord();
       },error => {
         this.error = error;
@@ -74,7 +74,7 @@ export class StationDetailsComponent implements OnInit {
 
 
   loadRecord() {
-    debugger
+
     this.dynamicTableData = [];
     this.stationList.forEach(element => {
       let row: Product = {
@@ -150,7 +150,7 @@ export class StationDetailsComponent implements OnInit {
       }
     });
   }
-  
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

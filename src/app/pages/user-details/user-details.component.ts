@@ -32,10 +32,10 @@ export class Product {
 })
 export class UserDetailsComponent implements OnInit {
 
- 
+
   @ViewChild('test1', { static: false }) content: ElementRef;
   testAttributesMap = new Map();
-  
+
   PAGE_SIZE = MatTableAttributes.PAGE_SIZE;
   PAGINATION_RANGE = MatTableAttributes.PAGINATION_RANGE;
   DATE_FORMAT = DateFormat.DATE_FORMAT;
@@ -45,7 +45,7 @@ export class UserDetailsComponent implements OnInit {
   salesPersonList:any;
   dynamicTableData: any[];
   user: User;
-  
+
   constructor(private adminService:AdminModulesService,private exportToExcelService: ExportToExcelService,public dialog: MatDialog)
    { }
 
@@ -60,7 +60,7 @@ export class UserDetailsComponent implements OnInit {
   getAllCustomer(){
     this.adminService.getUserList().pipe()
     .subscribe( data => {
-        console.log("data ",data); 
+        console.log("data ",data);
         this.salesPersonList = data['Data'];
         this.loadRecord();
       },error => {
@@ -70,7 +70,7 @@ export class UserDetailsComponent implements OnInit {
 
 
   loadRecord() {
-    debugger
+
     this.dynamicTableData = [];
     this.salesPersonList.forEach(element => {
       let row: Product = {
@@ -153,10 +153,10 @@ export class UserDetailsComponent implements OnInit {
   }
 
   public deleteRecord(recordId){
-   
+
   }
 
- 
+
 
 }
 

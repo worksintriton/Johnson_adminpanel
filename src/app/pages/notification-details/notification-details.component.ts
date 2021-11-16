@@ -22,7 +22,7 @@ export class Product {
 })
 export class NotificationDetailsComponent implements OnInit {
 
- 
+
   @ViewChild('test1', { static: false }) content: ElementRef;
   testAttributesMap = new Map();
   selection = new SelectionModel<Product>(true, []);
@@ -36,7 +36,7 @@ export class NotificationDetailsComponent implements OnInit {
   dynamicTableData: any[];
   user: User;
   userList: any[];
-  
+
   constructor(private adminService:AdminModulesService)
    { }
 
@@ -51,7 +51,7 @@ export class NotificationDetailsComponent implements OnInit {
   getAllCustomer(){
     this.adminService.getUserList().pipe()
     .subscribe( data => {
-        console.log("data ",data); 
+        console.log("data ",data);
         this.salesPersonList = data['Data'];
         this.loadRecord();
       },error => {
@@ -61,7 +61,7 @@ export class NotificationDetailsComponent implements OnInit {
 
 
   loadRecord() {
-    debugger
+
     this.dynamicTableData = [];
     this.salesPersonList.forEach(element => {
       let row: Product = {
@@ -91,7 +91,7 @@ export class NotificationDetailsComponent implements OnInit {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
- 
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -102,7 +102,7 @@ export class NotificationDetailsComponent implements OnInit {
 
 
   sendNotification() {
-    debugger;
+
     var selectedList = this.selection.selected;
     this.userList = [];
     selectedList.forEach(element => {

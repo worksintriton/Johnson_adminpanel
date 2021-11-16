@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DeleteticketComponent } from './deleteticket/deleteticket.component';
+import { ExceluploadComponent } from './excelupload/excelupload.component';
 import { FaultTypeDetailsComponent } from './fault-type-details/fault-type-details.component';
 import { JobNoDetailsComponent } from './job-no-details/job-no-details.component';
 import { NotificationDetailsComponent } from './notification-details/notification-details.component';
@@ -13,14 +15,15 @@ import { ViewTicketDetailsComponent } from './view-ticket-details/view-ticket-de
 
 const routes: Routes = [
    { path: 'dashboard', component: DashboardComponent },
-   { path: 'station-details',  component: StationDetailsComponent },  
-   { path: 'job-no-details',  component: JobNoDetailsComponent }, 
-   { path: 'user-details',  component: UserDetailsComponent }, 
-   { path: 'fault-details',  component: FaultTypeDetailsComponent }, 
+   { path: 'station-details',  component: StationDetailsComponent },
+   { path: 'job-no-details',  component: JobNoDetailsComponent },
+   { path: 'user-details',  component: UserDetailsComponent },
+   { path: 'fault-details',  component: FaultTypeDetailsComponent },
    { path: 'notification-details',  component: NotificationDetailsComponent },
    { path: 'ticket-details',  component: TicketDetailsComponent },
    { path: 'view-ticket-details',  component: ViewTicketDetailsComponent },
-
+   { path: 'excelupload', component: ExceluploadComponent },
+   { path: 'deleteticket', component: DeleteticketComponent },
 
 ];
 

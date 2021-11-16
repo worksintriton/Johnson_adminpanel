@@ -22,12 +22,12 @@ export class AddJobNoDetailsComponent implements OnInit {
     private adminService:AdminModulesService,) { this.user = this.authService.currentUser();  }
 
   ngOnInit() {
-   
+
   }
 
 
   public save() {
-    debugger
+
     this.isShowErrors = true;
     if (this.addForm.addEditForm.valid) {
       const enteredData = this.addForm.addEditForm.value;
@@ -41,16 +41,16 @@ export class AddJobNoDetailsComponent implements OnInit {
             this.handleError(err);
           }
         )
-      
+
     }
     else {
-     
+
     }
   }
 
   private success(message) {
     Swal.fire({toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, title: message, icon: 'success', });
-    this.dialogRef.close('Success'); 
+    this.dialogRef.close('Success');
    // this.alertService.success('Saved successfully');
   }
 

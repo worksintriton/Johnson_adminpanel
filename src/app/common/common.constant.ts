@@ -8,4 +8,4 @@ export const CommonConstants = {
     "WEBAPI_URL": "http://"+ DomainConfig.DOMAIN_SERVER + "/api/",
   }
 
- 
+  // http://54.215.252.172:3000/api/uploads/1632734938298.jpg

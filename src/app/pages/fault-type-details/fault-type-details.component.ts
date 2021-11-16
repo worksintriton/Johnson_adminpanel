@@ -28,7 +28,7 @@ export class Product {
 export class FaultTypeDetailsComponent implements OnInit {
   @ViewChild('test1', { static: false }) content: ElementRef;
   testAttributesMap = new Map();
-  
+
   PAGE_SIZE = MatTableAttributes.PAGE_SIZE;
   PAGINATION_RANGE = MatTableAttributes.PAGINATION_RANGE;
   DATE_FORMAT = DateFormat.DATE_FORMAT;
@@ -38,7 +38,7 @@ export class FaultTypeDetailsComponent implements OnInit {
   salesPersonList:any;
   dynamicTableData: any[];
   user: User;
-  
+
   constructor(private adminService:AdminModulesService,private exportToExcelService: ExportToExcelService, public dialog: MatDialog)
    { }
 
@@ -53,7 +53,7 @@ export class FaultTypeDetailsComponent implements OnInit {
   getAllCustomer(){
     this.adminService.getfaultList().pipe()
     .subscribe( data => {
-        console.log("data ",data); 
+        console.log("data ",data);
         this.salesPersonList = data['Data'];
         this.loadRecord();
       },error => {
@@ -63,12 +63,12 @@ export class FaultTypeDetailsComponent implements OnInit {
 
 
   loadRecord() {
-    debugger
+
     this.dynamicTableData = [];
     this.salesPersonList.forEach(element => {
       let row: Product = {
         type: element.type && element.type == 1 ?  "LIFT" : "ESCALATORS",
-        fault_type: element.fault_type,     
+        fault_type: element.fault_type,
         createdDate: element.createdAt,
         updatedDate: element.updatedAt,
         unique_id:element.unique_id,
@@ -119,10 +119,10 @@ export class FaultTypeDetailsComponent implements OnInit {
   }
 
   public deleteRecord(recordId){
-    // debugger
+    //
     // this.customerService.deleteCustomer(recordId).pipe()
     // .subscribe( data => {
-    //     console.log("data ",data); 
+    //     console.log("data ",data);
     //     this.salesPersonList = data;
     //     this.getAllCustomer();
     //   },error => {
@@ -130,7 +130,7 @@ export class FaultTypeDetailsComponent implements OnInit {
     //   });
   }
 
- 
+
   exportAsXLSX(): void {
     let new_list = this.dataSource.filteredData.map(function(obj) {
       return {

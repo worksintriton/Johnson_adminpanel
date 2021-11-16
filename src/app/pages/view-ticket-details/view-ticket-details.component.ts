@@ -30,7 +30,7 @@ export class Product {
 export class ViewTicketDetailsComponent implements OnInit {
   @ViewChild('test1', { static: false }) content: ElementRef;
   testAttributesMap = new Map();
-  
+
   PAGE_SIZE = MatTableAttributes.PAGE_SIZE;
   PAGINATION_RANGE = MatTableAttributes.PAGINATION_RANGE;
   DATE_FORMAT = DateFormat.DATE_FORMAT;
@@ -43,9 +43,9 @@ export class ViewTicketDetailsComponent implements OnInit {
   ticket_no: any;
   Days: any = '';
   penalty: any;
-  
+
   constructor(public dialog: MatDialog,private adminService:AdminModulesService, private route: ActivatedRoute,)
-   { 
+   {
     this.route.queryParams.subscribe(params => {
       this.ticket_no = params['ticket_no'];
       console.log("menuId ",this.ticket_no);
@@ -62,10 +62,10 @@ export class ViewTicketDetailsComponent implements OnInit {
   }
 
   getAllRecords(){
-    debugger;
+
     this.adminService.getSelectedTicketList(this.ticket_no).pipe()
     .subscribe( data => {
-        console.log("getSelectedTicketList ",data); 
+        console.log("getSelectedTicketList ",data);
         this.List = data['Data'];
         this.loadRecord();
       },error => {
@@ -75,10 +75,10 @@ export class ViewTicketDetailsComponent implements OnInit {
 
 
 
- 
-  
+
+
   loadRecord() {
-    debugger
+
     this.dynamicTableData = [];
     this.List.forEach(element => {
 
@@ -107,9 +107,9 @@ export class ViewTicketDetailsComponent implements OnInit {
 
 
   public viewImg(items) {
-    debugger
+
     const dialogRef = this.dialog.open(ViewTicketImageComponent, {
-      width: '650px',
+      width: '700px',
       height: 'fit-content',
       disableClose: true,
       data: {
@@ -118,11 +118,11 @@ export class ViewTicketDetailsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'Success') {
-       
+
       }
     });
   }
- 
+
 
 }
 
